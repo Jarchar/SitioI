@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import(
         BaseUserManager, AbstractBaseUser
         )
@@ -50,3 +51,10 @@ class Usuario(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class Imagen():
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE(),
+    )
+    imagen = models.ImageField(upload_to = 'static/sitioI/', default = 'pic_folder/None/no-img.jpg')
